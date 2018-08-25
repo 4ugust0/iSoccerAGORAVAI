@@ -16,6 +16,14 @@ public class Employee extends Person {
         this.employeeType = employeeType;
     }
 
+    public void setMonthlySalary(double monthlySalary) {
+        this.monthlySalary = monthlySalary;
+    }
+
+    public void setEmployeeType(String employeeType) {
+        this.employeeType = employeeType;
+    }
+
     private double monthlySalary;
     private String employeeType;
 

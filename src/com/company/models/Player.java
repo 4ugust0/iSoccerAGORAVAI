@@ -1,5 +1,7 @@
 package com.company.models;
 
+import com.company.util.Utility;
+
 public class Player extends Employee{
 
     public Player(String fullName, String eMail, String cpfNumber, String phoneNumber, double monthlySalary, String playerType){
@@ -13,11 +15,19 @@ public class Player extends Employee{
     private boolean isAble;
 
     public String getPlayerType() {
-        return this.playerType;
+        return playerType;
+    }
+
+    public void setPlayerType(String playerType) {
+        this.playerType = playerType;
     }
 
     public boolean isAble() {
-        return this.isAble;
+        return isAble;
+    }
+
+    public void setAble(boolean able) {
+        isAble = able;
     }
 
     @Override
@@ -25,4 +35,5 @@ public class Player extends Employee{
         return super.toString() + "\tPlayer type: " + this.playerType + "\n" +
                 "\tIs able to play: " + ((this.isAble())?("YES"):("NO")) + "\n";
     }
+
 }

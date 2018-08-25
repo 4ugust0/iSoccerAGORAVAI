@@ -1,5 +1,7 @@
 package com.company.screens;
 
+import com.company.util.Utility;
+
 import java.util.Scanner;
 
 public class MainScreen {
@@ -11,21 +13,18 @@ public class MainScreen {
     public static MainScreen getInstance() { return singleInstance; }
 
     public void startMainScreen(){
-        boolean inMainScreen = true;
-
-        while(inMainScreen){
+        while(true){
             try {
-                for(int i = 0; i < 100; ++i) System.out.println();
+                Utility.getInstance().clearTerminal();
+                Utility.getInstance().printHeader();
 
-                System.out.println("--- ISOCCER ---");
-                System.out.println();
                 System.out.println("0 - Add employee");
                 System.out.println("1 - Add supporter");
                 System.out.println("2 - Manage resources");
                 System.out.println("3 - Get reports");
                 System.out.println("4 - Exit");
 
-                int choosedNumber = new Scanner(System.in).nextInt();
+                int choosedNumber = Utility.getInstance().getInputScanner().nextInt();
 
                 switch (choosedNumber){
                     case 0:
@@ -46,9 +45,7 @@ public class MainScreen {
                         return;
                 }
             } catch (Exception e){
-                System.out.println("Try again");
-                e.printStackTrace();
-                new Scanner(System.in).nextLine();
+                Utility.getInstance().printError("Choose a valid input", e);
             }
         }
     }

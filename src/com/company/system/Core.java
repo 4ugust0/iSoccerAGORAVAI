@@ -1,6 +1,7 @@
 package com.company.system;
 
 import com.company.models.*;
+import com.company.util.Utility;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -76,28 +77,64 @@ public class Core {
         this.eliteValue = eliteValue;
     }
 
-    public void addPlayer(String fullName, String eMail, String cpfNumber, String phoneNumber, double monthlySalary, String playerType){
-        Player newPlayer = new Player(fullName, eMail, cpfNumber, phoneNumber, monthlySalary, playerType);
+    public void addPlayer(Employee employeeTemplate, String playerType){
+        Player newPlayer = new Player(
+                employeeTemplate.getFullName(),
+                employeeTemplate.geteMail(),
+                employeeTemplate.getCpfNumber(),
+                employeeTemplate.getPhoneNumber(),
+                employeeTemplate.getMonthlySalary(),
+                playerType);
         this.playerList.add(newPlayer);
     }
 
-    public void addDoctor(String fullName, String eMail, String cpfNumber, String phoneNumber, double monthlySalary, String crmNumber){
-        Doctor newDoctor = new Doctor(fullName, eMail, cpfNumber, phoneNumber, monthlySalary, crmNumber);
+    public void addDoctor(Employee employeeTemplate, String crmNumber){
+        Doctor newDoctor = new Doctor(
+                employeeTemplate.getFullName(),
+                employeeTemplate.geteMail(),
+                employeeTemplate.getCpfNumber(),
+                employeeTemplate.getPhoneNumber(),
+                employeeTemplate.getMonthlySalary(),
+                crmNumber);
         this.doctorList.add(newDoctor);
     }
 
-    public void addDriver(String fullName, String eMail, String cpfNumber, String phoneNumber, double monthlySalary, String cnhNumber){
-        Driver newDriver = new Driver(fullName, eMail, cpfNumber, phoneNumber, monthlySalary, cnhNumber);
+    public void addDriver(Employee employeeTemplate, String cnhNumber){
+        Driver newDriver = new Driver(
+                employeeTemplate.getFullName(),
+                employeeTemplate.geteMail(),
+                employeeTemplate.getCpfNumber(),
+                employeeTemplate.getPhoneNumber(),
+                employeeTemplate.getMonthlySalary(),
+                cnhNumber);
         this.driverList.add(newDriver);
     }
 
-    public void addOtherEmployee(String fullName, String eMail, String cpfNumber, String phoneNumber, double monthlySalary, String employeeType){
-        Employee newEmployee = new Employee(fullName, eMail, cpfNumber, phoneNumber, monthlySalary, employeeType);
+    public void addOtherEmployee(Employee employeeTemplate, String employeeType){
+        Employee newEmployee = new Employee(
+                employeeTemplate.getFullName(),
+                employeeTemplate.geteMail(),
+                employeeTemplate.getCpfNumber(),
+                employeeTemplate.getPhoneNumber(),
+                employeeTemplate.getMonthlySalary(),
+                employeeType);
         this.otherEmployees.add(newEmployee);
     }
 
     public void addSupporter(String fullName, String eMail, String cpfNumber, String phoneNumber, String supporterType){
         Supporter newSupporter = new Supporter(fullName, eMail, cpfNumber, phoneNumber, supporterType);
         this.supportersList.add(newSupporter);
+    }
+
+    public void switchPlayerDisponibility(String cpfNumber){
+        if(cpfNumber.matches("[0-9]{11}")){
+            for(Player p : this.playerList){
+                if(p.getCpfNumber().equals(cpfNumber)){
+                    p.setAble(!p.isAble());
+                }
+            }
+        } else{
+            Utility.getInstance().printError("Invalid cpf number, try again");
+        }
     }
 }
